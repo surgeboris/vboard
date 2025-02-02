@@ -1,2 +1,2 @@
 # vboard
-Virtual keyboard for Linux
+Virtual keyboard for Linux whick support wayland
