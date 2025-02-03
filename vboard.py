@@ -88,7 +88,7 @@ class VirtualKeyboard(Gtk.Window):
         if any(modifier in widget.get_label() for modifier in ["Shift", "Ctrl", "Alt"]) and not self.same_mod:
             self.device.emit(key_event, 1)  # Key press (1)
             self.Last_event = key_event
-            print(self.Last_event)
+            
         else:
             self.device.emit(key_event, 1)  # Key press (1)
             time.sleep(0.1)
