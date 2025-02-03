@@ -1,30 +1,50 @@
 # vboard
-Virtual keyboard for Linux that support wayland
+*A virtual keyboard for Linux with Wayland support.*
 
-First install python uinput library with
+
+### **1. Install Dependencies**  
+Install the `python-uinput` library using your package manager:  
+
+**For Debian/Ubuntu-based distributions:**  
 ```bash
 sudo apt install python-uinput
 ```
-or 
+
+**For Fedora-based distributions:**  
 ```bash
 sudo dnf install python-uinput
 ```
-Then download app
+---
 
+### **2. Download vboard**  
+Retrieve the latest version of `vboard.py` using `wget`:  
 ```bash
 wget https://raw.githubusercontent.com/mdev588/vboard/refs/heads/main/vboard.py
 ```
-Then you can run with 
+
+---
+
+### **3. Run vboard**  
+Run the application using:  
 ```bash
 sudo python3 vboard.py
 ```
 
 it is recommanded to run without sudo so you have to add a udev rule with this command then reboot
 
-run as user
+---
+
+## **Running Without sudo**  
+
+To allow non-root execution, add a **udev rule**:  
 ```bash
-echo "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"$(id -gn)\", OPTIONS+=\"static_node=uinput\"" | sudo tee /usr/lib/udev/rules.d/99-uinput.rules`
+echo 'KERNEL=="uinput", MODE="0660", GROUP="$(id -gn)", OPTIONS+="static_node=uinput"' | sudo tee /usr/lib/udev/rules.d/99-uinput.rules
 ```
-then you should able to run with
+Then **reboot your system**.
+
+After rebooting, you should be able to run `vboard` without `sudo`:  
 ```bash
 python3 vboard.py
+```
+
+---
