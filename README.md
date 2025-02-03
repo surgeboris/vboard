@@ -27,4 +27,4 @@ echo "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"$(id -gn)\", OPTIONS+=\"static_
 ```
 then you should able to run with
 ```bash
-python3 vboard
+python3 vboard.py
