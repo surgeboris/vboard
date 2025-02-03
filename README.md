@@ -30,9 +30,10 @@ Run the application using:
 sudo python3 vboard.py
 ```
 
-it is recommanded to run without sudo so you have to add a udev rule with this command then reboot
 
 ---
+However, **running as root is not recommended**. To run `vboard` without `sudo`, follow the next step.
+
 
 ## **Running Without sudo**  
 
