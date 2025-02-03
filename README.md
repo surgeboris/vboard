@@ -39,7 +39,7 @@ However, **running as root is not recommended**. To run `vboard` without `sudo`,
 
 To allow non-root execution, add a **udev rule**:  
 ```bash
-echo 'KERNEL=="uinput", MODE="0660", GROUP="$(id -gn)", OPTIONS+="static_node=uinput"' | sudo tee /usr/lib/udev/rules.d/99-uinput.rules
+echo "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"$(id -gn)\", OPTIONS+=\"static_node=uinput\"" | sudo tee /usr/lib/udev/rules.d/99-uinput.rules`
 ```
 Then **reboot your system**.
 
