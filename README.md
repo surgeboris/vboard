@@ -49,5 +49,5 @@ sudo modprobe uinput
 
 to make sure it auto load on boot create file with
 ```bash
-echo 'uinput' | sudo tee /etc/modules-load.d/module.conf
+echo 'uinput' | sudo tee /etc/modules-load.d/module-uinput.conf
 ```
