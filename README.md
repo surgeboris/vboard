@@ -41,3 +41,13 @@ python3 vboard.py
 ```
 
 ---
+## Troubleshooting
+if you get error 'no such device'. Make sure uinput kernel module is loded with
+```bash
+sudo modprobe uinput
+```
+
+to make sure it auto load on boot create file with
+```bash
+echo 'uinput' | sudo tee /etc/modules-load.d/module.conf
+```
