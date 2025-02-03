@@ -7,12 +7,12 @@ Install the `python-uinput` library using your package manager:
 
 **For Debian/Ubuntu-based distributions:**  
 ```bash
-sudo apt install python-uinput
+sudo apt install python3-uinput
 ```
 
 **For Fedora-based distributions:**  
 ```bash
-sudo dnf install python-uinput
+sudo dnf install python3-uinput
 ```
 ---
 
