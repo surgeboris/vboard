@@ -32,7 +32,8 @@ python3 vboard.py
 
 
 ## Troubleshooting
-if you get error 'no such device'. Make sure uinput kernel module is loded with
+### 1. Error: 'no such device'
+ Make sure uinput kernel module is loded with
 ```bash
 sudo modprobe uinput
 ```
@@ -41,3 +42,13 @@ to make sure it auto load on boot create file with
 ```bash
 echo 'uinput' | sudo tee /etc/modules-load.d/module-uinput.conf
 ```
+---
+### 2. Error: 'Permission Denied'
+Reload udev rules with
+```bash
+sudo udevadm control --reload-rules && sudo udevadm trigger
+```
+---
+### 3. Error: 'steam-devices package not found'
+Make sure the RPM Fusion repository is enabled. You can follow the guide here:
+https://rpmfusion.org/Configuration
