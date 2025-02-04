@@ -49,6 +49,6 @@ Reload udev rules with
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 ---
-### 3. Error: 'steam-devices package not found'
+### 3. Error: 'steam-devices package not found'. Fedora only
 Make sure the RPM Fusion repository is enabled. You can follow the guide here:
 https://rpmfusion.org/Configuration
