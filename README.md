@@ -3,18 +3,18 @@
 
 
 ### **1. Install Dependencies**  
-Install the `python-uinput` library using your package manager:  
+Install  `python-uinput steam-devices` packages using your package manager:  
 
 **For Debian/Ubuntu-based distributions:**  
 ```bash
-sudo apt install python3-uinput
+sudo apt install python3-uinput steam-devices
 ```
 
 **For Fedora-based distributions:**  
 ```bash
-sudo dnf install python3-uinput
+sudo dnf install python3-uinput steam-devices
 ```
----
+
 
 ### **2. Download vboard**  
 Retrieve the latest version of `vboard.py` using `wget`:  
@@ -22,25 +22,15 @@ Retrieve the latest version of `vboard.py` using `wget`:
 wget https://raw.githubusercontent.com/mdev588/vboard/refs/heads/main/vboard.py
 ```
 
----
 
-## **Running Without sudo**  
 
-To allow non-root execution, add a **udev rule**:  
-```bash
-echo "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"$(id -gn)\", OPTIONS+=\"static_node=uinput\"" | sudo tee /usr/lib/udev/rules.d/99-uinput-vboard.rules
-```
-Then 
-```bash
-sudo udevadm control --reload-rules && sudo udevadm trigger
-```
+### **3. Run**  
 
-Now you should be able to run `vboard` without `sudo`:  
 ```bash
 python3 vboard.py
 ```
 
----
+
 ## Troubleshooting
 if you get error 'no such device'. Make sure uinput kernel module is loded with
 ```bash
