@@ -22,7 +22,7 @@ key_mapping = {uinput.KEY_ESC: "Esc", uinput.KEY_1: "1", uinput.KEY_2: "2", uinp
     uinput.KEY_SCROLLLOCK: "ScrollLock", uinput.KEY_PAUSE: "Pause", uinput.KEY_INSERT: "Insert", uinput.KEY_HOME: "Home",
     uinput.KEY_PAGEUP: "PageUp", uinput.KEY_DELETE: "Delete", uinput.KEY_END: "End", uinput.KEY_PAGEDOWN: "PageDown",
     uinput.KEY_RIGHT: "→", uinput.KEY_LEFT: "←", uinput.KEY_DOWN: "↓", uinput.KEY_UP: "↑", uinput.KEY_NUMLOCK: "NumLock",
-    uinput.KEY_RIGHTCTRL: "Ctrl"}
+    uinput.KEY_RIGHTCTRL: "Ctrl", uinput.KEY_LEFTMETA:"Super", uinput.KEY_RIGHTMETA:"Super"}
 
 class VirtualKeyboard(Gtk.Window):
     def __init__(self):
@@ -34,8 +34,17 @@ class VirtualKeyboard(Gtk.Window):
         self.set_focus_on_map(False)
         self.set_can_focus(False)
         self.set_accept_focus(False)
-        self.same_mod = False
-        self.Last_event = ''
+        self.modifiers = {
+            uinput.KEY_LEFTSHIFT: False,
+            uinput.KEY_RIGHTSHIFT: False,
+            uinput.KEY_LEFTCTRL: False,
+            uinput.KEY_RIGHTCTRL: False,
+            uinput.KEY_LEFTALT: False,
+            uinput.KEY_RIGHTALT: False,
+            uinput.KEY_LEFTMETA: False,
+            uinput.KEY_RIGHTMETA: False
+        }
+
 
         grid = Gtk.Grid()  # Use Grid for layout
         grid.set_row_homogeneous(True)  # Allow rows to resize based on content
@@ -51,7 +60,7 @@ class VirtualKeyboard(Gtk.Window):
             ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
             ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
             ["Shift", "Z", "X", "C", "V", "B", "N", "M", ",", ".", "/", "Shift", "↑"],
-            ["Ctrl", "Alt", "Space", "Alt", "Ctrl", "←", "→", "↓"]
+            ["Ctrl","Super", "Alt", "Space", "Alt", "Super", "Ctrl", "←", "→", "↓"]
         ]
 
         # Create each row and add it to the grid
@@ -71,7 +80,7 @@ class VirtualKeyboard(Gtk.Window):
                 button.connect("clicked", self.on_button_click, key_event)
 
               # if key_label == "Tab": width=3
-                if key_label == "Space": width=14
+                if key_label == "Space": width=10
                 #elif key_label == "CapsLock": width=4
                 elif key_label == "Shift" and shift_bool: width=4
                 elif key_label == "Enter": width=4
@@ -82,26 +91,27 @@ class VirtualKeyboard(Gtk.Window):
                 if key_label == "Shift": shift_bool=True
 
     def on_button_click(self, widget, key_event):
-        if (key_event == self.Last_event):
-            self.same_mod = True
-        # For Shift, Ctrl, and Alt, only simulate the key press
-        if any(modifier in widget.get_label() for modifier in ["Shift", "Ctrl", "Alt"]) and not self.same_mod:
-            self.device.emit(key_event, 1)  # Key press (1)
-            self.Last_event = key_event
-            
-        else:
-            self.device.emit(key_event, 1)  # Key press (1)
-            time.sleep(0.1)
-            self.device.emit(key_event, 0)  # Key release (0)
-            # Unpress Shift, Ctrl, and Alt after a normal key press
-            self.device.emit(uinput.KEY_LEFTSHIFT, 0)  # Release Left Shift
-            self.device.emit(uinput.KEY_RIGHTSHIFT, 0)  # Release Right Shift
-            self.device.emit(uinput.KEY_LEFTCTRL, 0)   # Release Left Ctrl
-            self.device.emit(uinput.KEY_RIGHTCTRL, 0)  # Release Right Ctrl
-            self.device.emit(uinput.KEY_LEFTALT, 0)    # Release Left Alt
-            self.device.emit(uinput.KEY_RIGHTALT, 0)   # Release Right Alt
-            self.same_mod = False
-            self.Last_event = ''
+        # If the key event is one of the modifiers, update its state and return.
+        if key_event in self.modifiers:
+            self.modifiers[key_event] = not self.modifiers[key_event]
+            return
+        # For a normal key, press any active modifiers.
+        for mod_key, active in self.modifiers.items():
+            if active:
+                self.device.emit(mod_key, 1)
+
+        # Emit the normal key press.
+        self.device.emit(key_event, 1)
+        time.sleep(0.05)
+        self.device.emit(key_event, 0)
+
+        # Release the modifiers that were active.
+        for mod_key, active in self.modifiers.items():
+            if active:
+                self.device.emit(mod_key, 0)
+                self.modifiers[mod_key] = False
+
+
 
 if __name__ == "__main__":
     win = VirtualKeyboard()
