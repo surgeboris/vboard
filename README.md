@@ -15,6 +15,11 @@ sudo apt install python3-uinput steam-devices
 sudo dnf install python3-uinput steam-devices
 ```
 
+**For arch-based distributions:**  
+```bash
+yay -S python-uinput steam-devices
+```
+
 
 ### **2. Download vboard**  
 Retrieve the latest version of `vboard.py` using `wget`:  
