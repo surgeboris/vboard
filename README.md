@@ -57,3 +57,6 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
 ### 3. Error: 'steam-devices package not found'. Fedora only
 Make sure the RPM Fusion repository is enabled. You can follow the guide here:
 https://rpmfusion.org/Configuration
+
+## Note
+Currently, only the QWERTY US layout is supported, so other layouts may cause some keys to produce different keystrokes. BUT this could easily be fixed by modifying the row list arrangement
