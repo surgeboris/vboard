@@ -169,7 +169,7 @@ class VirtualKeyboard(Gtk.Window):
                 self.bg_color = color_
 
         if (self.bg_color in {"255,255,255" ,"0,255,0" , "255,255,0", "245,245,220", "230,230,250", "255,215,0"}):
-            self.text_color="black"
+            self.text_color="#1C1C1C"
         else:
             self.text_color="white"
         self.apply_css()
