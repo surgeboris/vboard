@@ -41,7 +41,7 @@ yay -S python-uinput steam-devices
 ### **2. Download vboard**  
 Retrieve the latest version of `vboard.py` using `wget`:  
 ```bash
-wget https://github.com/mdev588/vboard/releases/download/v1.14/vboard.py
+wget https://github.com/mdev588/vboard/releases/download/v1.15/vboard.py
 ```
 
 
