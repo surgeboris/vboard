@@ -269,11 +269,14 @@ class VirtualKeyboard(Gtk.Window):
                     button = Gtk.Button(label=key_label)
                 button.connect("clicked", self.on_button_click, key_event)
 
-              # if key_label == "Tab": width=3
-                if key_label == "Space": width=10
-                #elif key_label == "CapsLock": width=4
+                if key_label == "Space": width=12
+                elif key_label == "CapsLock": width=3
                 elif key_label == "Shift_R" : width=4
-                elif key_label == "Enter": width=4
+                elif key_label == "Shift_L" : width=4
+                elif key_label == "Backspace": width=5
+                elif key_label == "`": width=1
+                elif key_label == "\\" : width=4
+                elif key_label == "Enter": width=5
                 else: width=2
 
                 grid.attach(button, col, row_index, width, 1)
