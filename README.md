@@ -34,7 +34,7 @@ sudo dnf install python3-uinput steam-devices
 
 **For arch-based distributions:**  
 ```bash
-yay -S python-uinput steam-devices
+yay -Syu python-uinput steam-devices
 ```
 
 
