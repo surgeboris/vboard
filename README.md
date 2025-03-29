@@ -54,6 +54,26 @@ wget https://github.com/mdev588/vboard/releases/download/v1.16/vboard.py
 python3 vboard.py
 ```
 
+### **4. Create shortcut (optional)**  
+
+```bash
+cat > ~/.local/share/applications/vboard.desktop <<EOF
+[Desktop Entry]
+Exec=bash -c 'python3 ~/vboard.py'
+Icon=preferences-desktop-keyboard
+Name=Vboard
+Terminal=false
+Type=Application
+Categories=Utility
+NoDisplay=false
+EOF
+```
+Make shortcut executable
+```
+chmod +x ~/.local/share/applications/vboard.desktop
+```
+Now you should find it in menu insdie Utility section
+
 ### Usage
 When launched, vboard presents a compact keyboard with a minimal interface. The keyboard includes:
 - Standard QWERTY layout keys
