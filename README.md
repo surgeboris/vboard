@@ -136,4 +136,8 @@ Please make sure to test your changes before submitting a pull request.
 vboard is licensed under the GNU Lesser General Public License v2.1. See LICENSE.md for the full license text.
 
 ## Note
-Currently, only the QWERTY US layout is supported, so other layouts may cause some keys to produce different keystrokes. BUT this could easily be fixed by modifying the row list arrangement
+
+* Currently only the QWERTY US layout is supported, so other layouts may cause some keys to produce different keystrokes. But this could easily be fixed by modifying the row list arrangement.
+
+* Currently do not work correctly on wlroots based window managers.
+
