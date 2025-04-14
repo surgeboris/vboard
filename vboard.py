@@ -145,6 +145,7 @@ class VirtualKeyboard(Gtk.Window):
 
     def create_button(self, label_="", callback=None, callback2=None, callbacks=0):
         button= Gtk.Button(label=label_)
+        button.set_name("headbar-button")
         if callbacks==1:
             button.connect("clicked", callback)
         elif callbacks==2:
@@ -197,7 +198,8 @@ class VirtualKeyboard(Gtk.Window):
         headerbar button{{
             min-width: 40px;
             padding: 0px;
-            border: 0px
+            border: 0px;
+            
 
 
         }}
@@ -207,6 +209,9 @@ class VirtualKeyboard(Gtk.Window):
 
         }}
 
+        #headbar-button {{
+            background-image: none;
+        }}
 
         #toplevel {{
             background-color: rgba({self.bg_color}, {self.opacity});
@@ -223,7 +228,7 @@ class VirtualKeyboard(Gtk.Window):
         }}
 
         #grid button {{
-                    border: 1px solid #555555 ;
+                    border: 1px solid rgba(85, 85, 85, 0.7) ;
                     background-image: none;
 
                 }}
