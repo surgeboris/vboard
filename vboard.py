@@ -190,7 +190,7 @@ class VirtualKeyboard(Gtk.Window):
         css = f"""
         headerbar {{
             background-color: rgba({self.bg_color}, {self.opacity});
-
+            border: 0px;
 
         }}
 
@@ -222,17 +222,20 @@ class VirtualKeyboard(Gtk.Window):
 
         }}
 
+        #grid button {{
+                    border: 1px solid #555555 ;
+                    background-image: none;
 
+                }}
 
         button {{
             background-color: transparent;
-            border: 1px solid rgb(85, 85, 85);
-            color:white;
+            color:{self.text_color};
 
         }}
 
-        button:hover {{
-            border: 1px solid rgb(173, 216, 230);
+       #grid button:hover {{
+            border: 1px solid #00CACB;
         }}
 
        tooltip {{
