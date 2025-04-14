@@ -209,7 +209,7 @@ class VirtualKeyboard(Gtk.Window):
 
         }}
 
-        #headbar-button {{
+        #headbar-button, #combobox button.combo {{
             background-image: none;
         }}
 
