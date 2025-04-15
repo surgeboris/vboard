@@ -118,10 +118,10 @@ Reload udev rules with
 sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
 ---
-### 3. Error: 'steam-devices package not found'. Fedora only
-Make sure the RPM Fusion repository is enabled. You can follow the guide here:
+### 3. Error: 'steam-devices package not found'.
+- in Fedora make sure the RPM Fusion repository is enabled. You can follow the guide here:
 https://rpmfusion.org/Configuration
-
+- Others can follow steps in here https://github.com/mdev588/vboard/issues/8
 ## Contributing 
 Contributions to vboard are welcome! Here are some ways you can help:
 
