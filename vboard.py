@@ -192,6 +192,7 @@ class VirtualKeyboard(Gtk.Window):
         headerbar {{
             background-color: rgba({self.bg_color}, {self.opacity});
             border: 0px;
+            box-shadow: none;
 
         }}
 
@@ -199,9 +200,15 @@ class VirtualKeyboard(Gtk.Window):
             min-width: 40px;
             padding: 0px;
             border: 0px;
+            margin: 0px;
             
 
 
+        }}
+
+        headerbar .titlebutton {{
+            min-width: 50px;  /* Set custom min-width for the close button */
+            min-height: 40px
         }}
 
         headerbar button label{{
