@@ -235,7 +235,7 @@ class VirtualKeyboard(Gtk.Window):
         }}
 
         #grid button {{
-                    border: 1px solid rgba(85, 85, 85, 0.7) ;
+                    border: none ;
                     background-image: none;
 
                 }}
