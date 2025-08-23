@@ -286,6 +286,8 @@ class VirtualKeyboard(Gtk.Window):
             if key_event:
                 if key_label in ("Shift_R", "Shift_L", "Alt_L", "Alt_R", "Ctrl_L", "Ctrl_R", "Super_L", "Super_R"):
                     button = Gtk.Button(label=key_label[:-2])
+                elif len(key_label)==1:
+                    button = Gtk.Button(label=key_label.lower())
                 else:
                     button = Gtk.Button(label=key_label)
                 button.connect("clicked", self.on_button_click, key_event)
@@ -306,8 +308,12 @@ class VirtualKeyboard(Gtk.Window):
                 col += width  # Skip 4 columns for the space button
 
     def update_label(self, show_symbols):
-        button_positions = [(0, "` ~"), (1, "1 !"), (2, "2 @"), (3, "3 #"), (4, "4 $"), (5, "5 %"), (6, "6 ^"), (7, "7 &"), (8, "8 *"), (9, "9 ("), (10, "0 )")
-        , (11, "- _"), (12, "= +"),(25,"[ {"), (26,"] }"), (27,"\\ |"), (38, "; :"), (39, "' \""), (49, ", <"), (50, ". >"), (51, "/ ?")]
+        button_positions = [
+            (0, "` ~"), (1, "1 !"), (2, "2 @"), (3, "3 #"), (4, "4 $"), (5, "5 %"), (6, "6 ^"), (7, "7 &"), (8, "8 *"), (9, "9 ("), (10, "0 )") , (11, "- _"), (12, "= +"),
+            (15, "q Q"), (16, "w W"), (17, "e E"), (18, "r R"), (19, "t T"), (20, "y Y"), (21, "u U"), (22, "i I"), (23, "o O"), (24, "p P"), (25,"[ {"), (26,"] }"), (27,"\\ |"),
+            (29, "a A"), (30, "s S"), (31, "d D"), (32, "f F"), (33, "g G"), (34, "h H"), (35, "j J"), (36, "k K"), (37, "l L"), (38, "; :"), (39, "' \""),
+            (42, "z Z"), (43, "x X"), (44, "c C"), (45, "v V"), (46, "b B"), (47, "n N"), (48, "m M"), (49, ", <"), (50, ". >"), (51, "/ ?")
+        ]
 
         for pos, label in button_positions:
             label_parts = label.split()  
