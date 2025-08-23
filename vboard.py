@@ -49,6 +49,7 @@ class VirtualKeyboard(Gtk.Window):
         self.bg_color = "0, 0, 0"  # background color
         self.opacity="0.90"
         self.text_color="white"
+        self.fn_row=0
         self.read_settings()
 
         self.modifiers = {
@@ -112,6 +113,7 @@ class VirtualKeyboard(Gtk.Window):
 
         # Define rows for keys
         rows = [
+            ["Esc", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12", "Delete"],
             ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=", "Backspace" ],
             ["Tab", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]", "\\"],
             ["CapsLock", "A", "S", "D", "F", "G", "H", "J", "K", "L", ";", "'", "Enter"],
@@ -129,15 +131,16 @@ class VirtualKeyboard(Gtk.Window):
         self.create_button("+", self.change_opacity,True,2)
         self.create_button("-", self.change_opacity, False,2)
         self.create_button( f"{self.opacity}")
+
         self.color_combobox.append_text("Change Background")
         self.color_combobox.set_active(0)
         self.color_combobox.connect("changed", self.change_color)
         self.color_combobox.set_name("combobox")
         self.header.add(self.color_combobox)
-
-
         for label, color in self.colors:
             self.color_combobox.append_text(label)
+
+        self.create_button("fn", self.change_fn_row, callbacks=1)
 
     def on_resize(self, widget, event):
         self.width, self.height = self.get_size()  # Get the current size after resize
@@ -185,6 +188,16 @@ class VirtualKeyboard(Gtk.Window):
             self.opacity = str(round(max(0.0, float(self.opacity) - 0.01),2))
         self.opacity_btn.set_label(f"{self.opacity}")
         self.apply_css()
+
+    def change_fn_row(self, widget=None):
+        self.fn_row = 1 if self.fn_row == 0 else 0
+        self.update_fn_row()
+
+    def update_fn_row(self, widget=None):
+        for pos in range(0, 14):
+            button = self.row_buttons[pos];
+            button.set_visible(self.fn_row)
+
     def apply_css (self):
         provider = Gtk.CssProvider()
 
@@ -299,6 +312,7 @@ class VirtualKeyboard(Gtk.Window):
                 elif key_label == "Shift_R" : width=4
                 elif key_label == "Shift_L" : width=4
                 elif key_label == "Backspace": width=5
+                elif key_label == "Delete": width=4
                 elif key_label == "`": width=1
                 elif key_label == "\\" : width=4
                 elif key_label == "Enter": width=5
@@ -309,10 +323,10 @@ class VirtualKeyboard(Gtk.Window):
 
     def update_label(self, show_symbols):
         button_positions = [
-            (0, "` ~"), (1, "1 !"), (2, "2 @"), (3, "3 #"), (4, "4 $"), (5, "5 %"), (6, "6 ^"), (7, "7 &"), (8, "8 *"), (9, "9 ("), (10, "0 )") , (11, "- _"), (12, "= +"),
-            (15, "q Q"), (16, "w W"), (17, "e E"), (18, "r R"), (19, "t T"), (20, "y Y"), (21, "u U"), (22, "i I"), (23, "o O"), (24, "p P"), (25,"[ {"), (26,"] }"), (27,"\\ |"),
-            (29, "a A"), (30, "s S"), (31, "d D"), (32, "f F"), (33, "g G"), (34, "h H"), (35, "j J"), (36, "k K"), (37, "l L"), (38, "; :"), (39, "' \""),
-            (42, "z Z"), (43, "x X"), (44, "c C"), (45, "v V"), (46, "b B"), (47, "n N"), (48, "m M"), (49, ", <"), (50, ". >"), (51, "/ ?")
+            (14, "` ~"), (15, "1 !"), (16, "2 @"), (17, "3 #"), (18, "4 $"), (19, "5 %"), (20, "6 ^"), (21, "7 &"), (22, "8 *"), (23, "9 ("), (24, "0 )") , (25, "- _"), (26, "= +"),
+            (29, "q Q"), (30, "w W"), (31, "e E"), (32, "r R"), (33, "t T"), (34, "y Y"), (35, "u U"), (36, "i I"), (37, "o O"), (38, "p P"), (39,"[ {"), (40,"] }"), (41,"\\ |"),
+            (43, "a A"), (44, "s S"), (45, "d D"), (46, "f F"), (47, "g G"), (48, "h H"), (49, "j J"), (50, "k K"), (51, "l L"), (52, "; :"), (53, "' \""),
+            (56, "z Z"), (57, "x X"), (58, "c C"), (59, "v V"), (60, "b B"), (61, "n N"), (62, "m M"), (63, ", <"), (64, ". >"), (65, "/ ?")
         ]
 
         for pos, label in button_positions:
@@ -375,6 +389,7 @@ class VirtualKeyboard(Gtk.Window):
                 self.text_color = self.config.get("DEFAULT", "text_color", fallback="white" )
                 self.width=self.config.getint("DEFAULT", "width" , fallback=0)
                 self.height=self.config.getint("DEFAULT", "height", fallback=0)
+                self.fn_row=self.config.getint("DEFAULT", "fn_row", fallback=0)
                 print(f"rgba: {self.bg_color}, {self.opacity}")
 
         except configparser.Error as e:
@@ -384,7 +399,7 @@ class VirtualKeyboard(Gtk.Window):
 
     def save_settings(self):
 
-        self.config["DEFAULT"] = {"bg_color": self.bg_color, "opacity": self.opacity, "text_color": self.text_color, "width": self.width, "height": self.height}
+        self.config["DEFAULT"] = {"bg_color": self.bg_color, "opacity": self.opacity, "text_color": self.text_color, "width": self.width, "height": self.height, "fn_row": self.fn_row}
 
         try:
             with open(self.CONFIG_FILE, "w") as configfile:
@@ -400,5 +415,7 @@ if __name__ == "__main__":
     win.connect("destroy", lambda w: win.save_settings())
     win.show_all()
     win.connect("configure-event", win.on_resize)
+    win.update_fn_row()
     win.change_visibility()
     Gtk.main()
+
