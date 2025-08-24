@@ -311,9 +311,8 @@ class VirtualKeyboard(Gtk.Window):
                 elif key_label == "CapsLock": width=3
                 elif key_label == "Shift_R" : width=4
                 elif key_label == "Shift_L" : width=4
-                elif key_label == "Backspace": width=5
+                elif key_label == "Backspace": width=4
                 elif key_label == "Delete": width=4
-                elif key_label == "`": width=1
                 elif key_label == "\\" : width=4
                 elif key_label == "Enter": width=5
                 else: width=2
